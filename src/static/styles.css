@@ -24,7 +24,7 @@ body::before {
       #00fff7 0px,
       #00fff7 2px,
       transparent 2px,
-      transparent 32px
+      transparent 75px
     ),
     repeating-linear-gradient(
       to bottom,
@@ -268,7 +268,7 @@ footer {
 
 /* Number of lines and spacing */
 :root {
-  --cyberpunk-lines: 2;
+  --cyberpunk-lines: 6;
   --cyberpunk-spacing: calc(100vh / (var(--cyberpunk-lines) + 1));
 }
 
