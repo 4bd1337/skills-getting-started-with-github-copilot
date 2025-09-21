@@ -1,4 +1,4 @@
-/* Cyberpunk Neon Palette & Animated Lines Background */
+/* Cyberpunk Neon Palette & Static Grid Background */
 body {
   font-family: 'Orbitron', Arial, sans-serif;
   line-height: 1.6;
@@ -11,7 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Vanishing point vertical grid (static) */
+/* Vanishing point vertical and horizontal grid (static, centered) */
 body::before {
   content: "";
   position: fixed;
@@ -24,42 +24,34 @@ body::before {
       #00fff7 0px,
       #00fff7 2px,
       transparent 2px,
-      transparent 80px
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      #ff00cc 0px,
+      #ff00cc 2px,
+      transparent 2px,
+      transparent 48px
     );
   opacity: 0.18;
-  /* Simulate vanishing point by scaling Y */
-  transform: perspective(600px) rotateX(30deg) scaleY(1.2);
+  transform-origin: 50vw 50vh;
+  transform: perspective(600px) rotateX(60deg) scaleY(1.2);
+  animation: grid-move 6s linear infinite;
 }
 
-/* Animated horizontal lines */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  background: none;
-  /* Use multiple box-shadows for horizontal lines, animated with keyframes */
-  animation: cyberpunk-horizontal-lines 2s linear infinite;
-}
-
-@keyframes cyberpunk-horizontal-lines {
+@keyframes grid-move {
   0% {
-    box-shadow:
-      0px 0px 0px 0px #ff00cc,
-      0px 40px 0px 0px #00fff7,
-      0px 80px 0px 0px #ff00cc,
-      0px 120px 0px 0px #00fff7,
-      0px 160px 0px 0px #ff00cc;
+    background-position: 0 0, 0 0;
   }
   100% {
-    box-shadow:
-      0px 100vh 0px 0px #ff00cc,
-      0px calc(100vh + 40px) 0px 0px #00fff7,
-      0px calc(100vh + 80px) 0px 0px #ff00cc,
-      0px calc(100vh + 120px) 0px 0px #00fff7,
-      0px calc(100vh + 160px) 0px 0px #ff00cc;
+    background-position: 0 48px, 32px 48px;
   }
+}
+
+/* Remove animated horizontal lines and related elements */
+.cyberpunk-bg,
+.cyberpunk-line {
+  display: none !important;
 }
 
 header {
@@ -261,6 +253,7 @@ footer {
 
 /* Import Orbitron font for cyberpunk style */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
 /* Add this at the end of your CSS file */
 
@@ -273,44 +266,64 @@ footer {
   overflow: hidden;
 }
 
-/* Distribute lines symmetrically from top to bottom */
+/* Number of lines and spacing */
+:root {
+  --cyberpunk-lines: 6;
+  --cyberpunk-spacing: calc(100vh / (var(--cyberpunk-lines) + 1));
+}
+
 .cyberpunk-line {
   position: absolute;
   left: 0;
   width: 100vw;
   height: 2px;
-  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
   opacity: 0.35;
   animation: cyberpunk-line-scroll 3s linear infinite;
 }
 
 .cyberpunk-line:nth-child(1) {
-  top: 10vh;
+  top: calc(var(--cyberpunk-spacing) * 1);
   animation-delay: 0s;
   background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
 }
 .cyberpunk-line:nth-child(2) {
-  top: 28vh;
+  top: calc(var(--cyberpunk-spacing) * 2);
   animation-delay: 0.5s;
   background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
 }
 .cyberpunk-line:nth-child(3) {
-  top: 46vh;
+  top: calc(var(--cyberpunk-spacing) * 3);
   animation-delay: 1s;
   background: linear-gradient(90deg, #00fff7 0%, #333399 100%);
 }
 .cyberpunk-line:nth-child(4) {
-  top: 64vh;
+  top: calc(var(--cyberpunk-spacing) * 4);
   animation-delay: 1.5s;
   background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
 }
 .cyberpunk-line:nth-child(5) {
-  top: 82vh;
+  top: calc(var(--cyberpunk-spacing) * 5);
   animation-delay: 2s;
   background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
 }
 .cyberpunk-line:nth-child(6) {
-  top: 90vh;
+  top: calc(var(--cyberpunk-spacing) * 6);
+  animation-delay: 2.5s;
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+}
+
+@keyframes cyberpunk-line-scroll {
+  0% { opacity: 0.35; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+.cyberpunk-line:nth-child(5) {
+  top: calc(var(--cyberpunk-spacing) * 5);
+  animation-delay: 2s;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+}
+.cyberpunk-line:nth-child(6) {
+  top: calc(var(--cyberpunk-spacing) * 6);
   animation-delay: 2.5s;
   background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
 }
