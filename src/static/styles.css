@@ -36,7 +36,7 @@ body::before {
   opacity: 0.18;
   transform-origin: 50vw 50vh;
   transform: perspective(600px) rotateX(60deg) scaleY(1.2);
-  animation: grid-move 6s linear infinite;
+  animation: grid-move 2s linear infinite;
 }
 
 @keyframes grid-move {
@@ -268,7 +268,7 @@ footer {
 
 /* Number of lines and spacing */
 :root {
-  --cyberpunk-lines: 6;
+  --cyberpunk-lines: 2;
   --cyberpunk-spacing: calc(100vh / (var(--cyberpunk-lines) + 1));
 }
 
