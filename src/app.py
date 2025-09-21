@@ -96,13 +96,6 @@ activities = {
         "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
         "participants": ["zoe@mergington.edu", "henry@mergington.edu"]
-    },
-    # Random activity
-    "Board Game Night": {
-        "description": "Play a variety of board games and socialize with friends",
-        "schedule": "Saturdays, 6:00 PM - 8:00 PM",
-        "max_participants": 25,
-        "participants": ["nina@mergington.edu", "sam@mergington.edu"]
     }
 }
 

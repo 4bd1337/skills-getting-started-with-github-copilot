@@ -1,6 +1,5 @@
 /* Import Orbitron font for cyberpunk style */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
 /* Cyberpunk Neon Palette & Static Grid Background */
 body {
@@ -268,81 +267,7 @@ footer {
 
 /* Add this at the end of your CSS file */
 
-/* Cyberpunk animated horizontal lines (scrolling from top to bottom) */
-.cyberpunk-bg {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* Number of lines and spacing */
-:root {
-  --cyberpunk-lines: 6;
-  --cyberpunk-spacing: calc(100vh / (var(--cyberpunk-lines) + 1));
-}
-
-.cyberpunk-line {
-  position: absolute;
-  left: 0;
-  width: 100vw;
-  height: 2px;
-  opacity: 0.35;
-  animation: cyberpunk-line-scroll 3s linear infinite;
-}
-
-.cyberpunk-line:nth-child(1) {
-  top: calc(var(--cyberpunk-spacing) * 1);
-  animation-delay: 0s;
-  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
-}
-.cyberpunk-line:nth-child(2) {
-  top: calc(var(--cyberpunk-spacing) * 2);
-  animation-delay: 0.5s;
-  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
-}
-.cyberpunk-line:nth-child(3) {
-  top: calc(var(--cyberpunk-spacing) * 3);
-  animation-delay: 1s;
-  background: linear-gradient(90deg, #00fff7 0%, #333399 100%);
-}
-.cyberpunk-line:nth-child(4) {
-  top: calc(var(--cyberpunk-spacing) * 4);
-  animation-delay: 1.5s;
-  background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
-}
-.cyberpunk-line:nth-child(5) {
-  top: calc(var(--cyberpunk-spacing) * 5);
-  animation-delay: 2s;
-  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
-}
-.cyberpunk-line:nth-child(6) {
-  top: calc(var(--cyberpunk-spacing) * 6);
-  animation-delay: 2.5s;
-  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
-}
-
-@keyframes cyberpunk-line-scroll {
-  0% { opacity: 0.35; }
-  100% { top: 100vh; opacity: 0; }
-}
-
-.cyberpunk-line:nth-child(5) {
-  top: calc(var(--cyberpunk-spacing) * 5);
-  animation-delay: 2s;
-  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
-}
-.cyberpunk-line:nth-child(6) {
-  top: calc(var(--cyberpunk-spacing) * 6);
-  animation-delay: 2.5s;
-  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
-}
-
-@keyframes cyberpunk-line-scroll {
-  0% { opacity: 0.35; }
-  100% { top: 100vh; opacity: 0; }
-}
+/* Removed unused cyberpunk background and line CSS definitions as these elements are hidden */
 
 form#signup-form .form-group {
   display: flex;
