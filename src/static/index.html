@@ -54,22 +54,28 @@
       <p>&copy; 2023 Mergington High School</p>
     </footer>
 
-  <audio id="bg-music" autoplay loop>
-    <source src="song.ogg" type="audio/ogg">
-    <source src="song.mp3" type="audio/mpeg">
+  <audio id="bg-music" src="song.ogg" autoplay loop controls>
     Your browser does not support the audio element.
   </audio>
   <button id="music-toggle" style="position:fixed;bottom:20px;right:20px;z-index:10;">🔊</button>
 
     <script src="app.js"></script>
     <script>
-      // Simple mute/unmute toggle
+      // Play/pause toggle
       const music = document.getElementById('bg-music');
       const toggleBtn = document.getElementById('music-toggle');
       toggleBtn.onclick = () => {
-        music.muted = !music.muted;
-        toggleBtn.textContent = music.muted ? '🔇' : '🔊';
+        if (music.paused) {
+          music.play();
+          toggleBtn.textContent = '⏸️';
+        } else {
+          music.pause();
+          toggleBtn.textContent = '▶️';
+        }
       };
+      // Set initial button state
+      music.onplay = () => { toggleBtn.textContent = '⏸️'; };
+      music.onpause = () => { toggleBtn.textContent = '▶️'; };
     </script>
   </body>
 </html>

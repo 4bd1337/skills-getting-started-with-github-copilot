@@ -104,4 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize app
   fetchActivities();
+  // Play song
+  audioElement.play();
 });
