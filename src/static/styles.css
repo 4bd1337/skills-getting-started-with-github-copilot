@@ -59,9 +59,11 @@ body::before {
 }
 
 header {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding: 20px 0;
-  margin-bottom: 30px;
+  margin: 5px 15px 50px 15px;
   background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
   color: #00fff7;
   border-radius: 8px;
@@ -331,4 +333,134 @@ footer {
 @keyframes cyberpunk-line-scroll {
   0% { opacity: 0.35; }
   100% { top: 100vh; opacity: 0; }
+}
+
+form#signup-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+form#signup-form label {
+  margin-bottom: 0.3em;
+}
+
+form#signup-form input[type="email"],
+form#signup-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  font-size: 1em;
+  border-radius: 4px;
+  border: 1px solid #888;
+  background: #222;
+  color: #fff;
+}
+
+form#signup-form button[type="submit"] {
+  width: 100%;
+  padding: 0.7em;
+  font-size: 1em;
+  border-radius: 4px;
+  border: none;
+  /* Use same gradient as other buttons */
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+  color: #18122B;
+  cursor: pointer;
+  margin-top: 0.5em;
+  font-family: 'Orbitron', Arial, sans-serif;
+  box-shadow: 0 0 8px #00fff7;
+  transition: background 0.2s, color 0.2s;
+}
+
+form#signup-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  color: #fff;
+}
+
+#signup-container {
+  max-width: 500px;
+  width: 100%;
+  min-height: unset;
+  height: 100%;
+  display: inline-block;
+  flex-direction: unset;
+  justify-content: unset;
+  align-items: unset;
+  padding-bottom: 0;
+  vertical-align: top;
+  /* Remove background and box-shadow if you want it to blend in more */
+  /* background: none;
+  box-shadow: none;
+  border: none; */
+}
+
+/* Volume slider styles */
+#volume-slider {
+  appearance: none;
+  width: 180px;
+  height: 12px;
+  background: linear-gradient(180deg, #00fff7 0%, #ff00cc 100%);
+  border-radius: 8px;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #ff00cc, 0 0 8px #00fff7 inset;
+  outline: none;
+  margin-bottom: 0;
+  opacity: 1;
+  position: fixed;
+  top: 115px;    /* Adjust for header height */
+  left: -75px;   /* Padding from left */
+  z-index: 20;
+  transform: rotate(90deg);
+  /* Add a subtle glow for cyberpunk effect */
+  transition: box-shadow 0.2s;
+}
+
+#volume-slider:focus {
+  outline: none;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#volume-slider::-webkit-slider-thumb:hover {
+  background: #00fff7;
+  border-color: #ff00cc;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#volume-slider::-moz-range-thumb:hover {
+  background: #00fff7;
+  border-color: #ff00cc;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
 }

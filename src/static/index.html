@@ -16,9 +16,10 @@
       <div class="cyberpunk-line"></div>
     </div>
 
-    <header>
-      <h1>Mergington High School</h1>
-      <h2>Extracurricular Activities</h2>
+    <header style="position:relative;height:140px;">
+      <div id="header-particles" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:auto;z-index:0;"></div>
+      <h1 style="position:relative;z-index:1;">Mergington High School</h1>
+      <h2 style="position:relative;z-index:1;">Extracurricular Activities</h2>
     </header>
 
     <main>
@@ -46,6 +47,7 @@
           </div>
           <button type="submit">Sign Up</button>
         </form>
+        <br>
         <div id="message" class="hidden"></div>
       </section>
     </main>
@@ -54,16 +56,22 @@
       <p>&copy; 2023 Mergington High School</p>
     </footer>
 
-  <audio id="bg-music" src="song.ogg" autoplay loop controls>
+  <audio id="bg-music" src="song.ogg" autoplay loop>
     Your browser does not support the audio element.
   </audio>
-  <button id="music-toggle" style="position:fixed;bottom:20px;right:20px;z-index:10;">🔊</button>
+  <button id="music-toggle" style="position:fixed;bottom:20px;right:20px;z-index:10;">▶️</button>
+  <button id="volume-toggle" style="position:fixed;bottom:20px;left:20px;z-index:10;">🔈</button>
+  <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="5">
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="app.js"></script>
     <script>
       // Play/pause toggle
       const music = document.getElementById('bg-music');
       const toggleBtn = document.getElementById('music-toggle');
+      const volumeBtn = document.getElementById('volume-toggle');
+      const volumeSlider = document.getElementById('volume-slider');
+
       toggleBtn.onclick = () => {
         if (music.paused) {
           music.play();
@@ -76,6 +84,88 @@
       // Set initial button state
       music.onplay = () => { toggleBtn.textContent = '⏸️'; };
       music.onpause = () => { toggleBtn.textContent = '▶️'; };
+
+      // Volume mute/unmute toggle
+      volumeBtn.onclick = () => {
+        music.muted = !music.muted;
+        volumeBtn.textContent = music.muted ? '🔇' : '🔈';
+      };
+      // Set initial volume button state
+      music.onvolumechange = () => {
+        volumeBtn.textContent = music.muted ? '🔇' : '🔈';
+        if (!music.muted) volumeSlider.value = 1 - music.volume;
+      };
+
+      // Volume slider control (vertical, inverted mapping)
+      volumeSlider.oninput = (e) => {
+        music.volume = 1 - parseFloat(e.target.value);
+        music.muted = false;
+        volumeBtn.textContent = '🔈';
+      };
+
+      // Enhanced cyberpunk particles using particles.js
+      particlesJS("header-particles", {
+        "particles": {
+          "number": {
+            "value": 600,
+            "density": { "enable": true, "value_area": 800 }
+          },
+          "color": {
+            "value": ["#00fff7", "#ffe600", "#39ff14", "#fff", "#fff700", "#bfff00"]
+          },
+          "shape": { "type": "circle" },
+          "opacity": { "value": 0.95, "random": true },
+          "size": { "value": 4, "random": true },
+          "line_linked": {
+            "enable": true,
+            "distance": 80,
+            "color": "#00fff7",
+            "opacity": 0.7,
+            "width": 1.5
+          },
+          "move": {
+            "enable": true,
+            "speed": 1.2,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "window", // Use "window" for best mouse detection
+          "events": {
+            "onhover": { "enable": true, "mode": "grab" },
+            "onclick": { "enable": true, "mode": "repulse" }
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": { "opacity": 1 }
+            },
+            "repulse": {
+              "distance": 180,
+              "duration": 0.6
+            }
+          }
+        },
+        "retina_detect": true
+      });
+    </script>
+  </body>
+</html>
+      });
+    </script>
+  </body>
+</html>
+          updateParticles();
+          drawParticles();
+          requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+      }
     </script>
   </body>
 </html>
