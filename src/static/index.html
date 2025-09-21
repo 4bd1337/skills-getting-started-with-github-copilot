@@ -7,9 +7,23 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Mergington High School</h1>
-      <h2>Extracurricular Activities</h2>
+    <div class="cyberpunk-bg">
+      <div class="cyberpunk-line"></div>
+      <div class="cyberpunk-line"></div>
+      <div class="cyberpunk-line"></div>
+      <div class="cyberpunk-line"></div>
+      <div class="cyberpunk-line"></div>
+      <div class="cyberpunk-line"></div>
+    </div>
+      
+    <header style="position:relative;height:140px;">
+      <h1 style="position:relative;">Mergington High School</h1>
+      <h2 style="position:relative;">Extracurricular Activities</h2>
+      <canvas class="particles-js"></canvas>
+      <div id="header-particles" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:auto;z-index:0;">
+          
+      </div>
+     
     </header>
 
     <main>
@@ -37,6 +51,7 @@
           </div>
           <button type="submit">Sign Up</button>
         </form>
+        <br>
         <div id="message" class="hidden"></div>
       </section>
     </main>
@@ -45,6 +60,475 @@
       <p>&copy; 2023 Mergington High School</p>
     </footer>
 
+  <audio id="bg-music" src="song.ogg" autoplay loop>
+    Your browser does not support the audio element.
+  </audio>
+  <button id="music-toggle" style="position:fixed;bottom:20px;right:20px;z-index:10;">▶️</button>
+  <button id="volume-toggle" style="position:fixed;bottom:20px;left:20px;z-index:10;">🔈</button>
+  <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.5">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="app.js"></script>
+    <script>
+      // Play/pause toggle
+      const music = document.getElementById('bg-music');
+      const toggleBtn = document.getElementById('music-toggle');
+      const volumeBtn = document.getElementById('volume-toggle');
+      const volumeSlider = document.getElementById('volume-slider');
+
+      toggleBtn.onclick = () => {
+        if (music.paused) {
+          music.play();
+          toggleBtn.textContent = '⏸️';
+        } else {
+          music.pause();
+          toggleBtn.textContent = '▶️';
+        }
+      };
+      // Set initial button state
+      music.onplay = () => { toggleBtn.textContent = '⏸️'; };
+      music.onpause = () => { toggleBtn.textContent = '▶️'; };
+
+      // Volume mute/unmute toggle
+      volumeBtn.onclick = () => {
+        music.muted = !music.muted;
+        volumeBtn.textContent = music.muted ? '🔇' : '🔈';
+      };
+      // Set initial volume button state
+      music.onvolumechange = () => {
+        volumeBtn.textContent = music.muted ? '🔇' : '🔈';
+        if (!music.muted) volumeSlider.value = 1 - music.volume;
+      };
+
+      // Volume slider control (vertical, inverted mapping)
+      volumeSlider.oninput = (e) => {
+        music.volume = 1 - parseFloat(e.target.value);
+        music.muted = false;
+        volumeBtn.textContent = '🔈';
+      };
+
+      // Enhanced cyberpunk particles using particles.js
+      /* particlesJS("header-particles", {
+        "particles": {
+          "number": {
+            "value": 600,
+            "density": { "enable": true, "value_area": 800 }
+          },
+          "color": {
+            "value": ["#00fff7", "#ffe600", "#39ff14", "#fff", "#fff700", "#bfff00"]
+          },
+          "shape": { "type": "circle" },
+          "opacity": { "value": 0.95, "random": true },
+          "size": { "value": 4, "random": true },
+          "line_linked": {
+            "enable": true,
+            "distance": 80,
+            "color": "#00fff7",
+            "opacity": 0.7,
+            "width": 1.5
+          },
+          "move": {
+            "enable": true,
+            "speed": 1.2,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "window", // Use "window" for best mouse detection
+          "events": {
+            "onhover": { "enable": true, "mode": "grab" },
+            "onclick": { "enable": true, "mode": "repulse" }
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": { "opacity": 1 }
+            },
+            "repulse": {
+              "distance": 180,
+              "duration": 0.6
+            }
+          }
+        },
+        "retina_detect": true
+      }); */
+
+
+
+            /* particlesJS("header-particles",{
+              "particles":{
+                "number":{
+                  "value":300,
+                  "density":{
+                    "enable":true,
+                    "value_area":800
+                  }
+                },
+                "color": {
+                  "value": [
+                    "#00fff7",
+                    "#ffe600",
+                    "#39ff14",
+                    "#fff",
+                    "#fff700",
+                    "#bfff00"
+                  ]
+                },
+                "shape":{
+                  "type":"circle",
+                  "stroke":{
+                    "width":0,
+                    "color":"#000000"
+                  },
+                  "polygon":{
+                    "nb_sides":5
+                  },
+                  "image":{
+                    "src":"img/github.svg",
+                    "width":100,
+                    "height":100
+                  }
+                },
+                "opacity": { "value": 0.95, "random": true },
+                "size": { "value": 4, "random": true },
+                "line_linked": {
+                  "enable": true,
+                  "distance": 80,
+                  "color": "#00fff7",
+                  "opacity": 0.7,
+                  "width": 1.5
+                },
+                "opacity":{
+                  "value":0.5,
+                  "random":false,
+                  "anim":{
+                    "enable":false,
+                    "speed":1,
+                    "opacity_min":0.1,
+                    "sync":false
+                  }
+                },
+                "size":{
+                  "value":3,
+                  "random":true,
+                  "anim":{
+                    "enable":false,
+                    "speed":40,
+                    "size_min":0.1,
+                    "sync":false
+                  }
+                },
+                "line_linked":{
+                  "enable":true,
+                  "distance":150,
+                  "color":"#ffffff",
+                  "opacity":0.4,
+                  "width":1
+                },
+                "move":{
+                  "enable":true,
+                  "speed":3,
+                  "direction":"none",
+                  "random":true,
+                  "straight":false,
+                  "out_mode":"out",
+                  "bounce":false,
+                  "attract":{
+                    "enable":true,
+                    "rotateX":600,
+                    "rotateY":1200
+                  }
+                }
+              },
+              "interactivity":{
+                "detect_on":"canvas",
+                "events":{
+                  "onhover":{
+                    "enable":true,
+                    "mode":"grab"
+                  },
+                  "onclick":{
+                    "enable":true,
+                    "mode":"push"
+                  },
+                  "resize":true
+                },
+                "modes":{
+                  "grab":{
+                    "distance":140,
+                    "line_linked":{
+                      "opacity":1
+                    }
+                  },
+                  "bubble":{
+                    "distance":140,
+                    "size":40,
+                    "duration":2,
+                    "opacity":8,
+                    "speed":3
+                  },
+                  "repulse":{
+                    "distance":160,
+                    "duration":0.6
+                  },
+                  "push":{
+                    "particles_nb":4
+                  },
+                  "remove":{
+                    "particles_nb":2
+                  }
+                }
+              },
+              "retina_detect":true
+            }); */
+            
+            /* var count_particles, stats, update; 
+            stats = new Stats; stats.setMode(0); 
+            stats.domElement.style.position = 'absolute'; 
+            stats.domElement.style.left = '0px'; 
+            stats.domElement.style.top = '0px'; 
+            document.body.appendChild(stats.domElement); 
+            count_particles = document.querySelector('.js-count-particles'); 
+            update = function(){
+              stats.begin();
+              stats.end(); 
+              if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array){
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+              }
+              requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update); */
+
+            particlesJS("header-particles",{
+              "particles": {
+                "number": {
+                  "value": 300,
+                  "density": {
+                    "enable": true,
+                    "value_area": 800
+                  }
+                },
+                "color": {
+                  "value": ["#00fff7", "#ffe600", "#39ff14", "#fff", "#fff700", "#bfff00"]
+                },
+                "shape": {
+                  "type": "circle",
+                  "stroke": {
+                    "width": 0,
+                    "color": "#3058b9"
+                  },
+                  "polygon": {
+                    "nb_sides": 5
+                  },
+                  "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                  }
+                },
+                "opacity": {
+                  "value": 0.5,
+                  "random": false,
+                  "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                  }
+                },
+                "size": {
+                  "value": 3,
+                  "random": true,
+                  "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                  }
+                },
+                "line_linked": {
+                  "enable": true,
+                  "distance": 150,
+                  "color": "#ffffff",
+                  "opacity": 0.4,
+                  "width": 1
+                },
+                "move": {
+                  "enable": true,
+                  "speed": 3,
+                  "direction": "none",
+                  "random": true,
+                  "straight": false,
+                  "out_mode": "out",
+                  "bounce": false,
+                  "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                  }
+                }
+              },
+              "interactivity": {
+                "detect_on": "window",
+                "events": {
+                  "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                  },
+                  "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                  },
+                  "resize": true
+                },
+                "modes": {
+                  "grab": {
+                    "distance": 100,
+                    "line_linked": {
+                      "opacity": 1
+                    }
+                  },
+                  "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                  },
+                  "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                  },
+                  "push": {
+                    "particles_nb": 4
+                  },
+                  "remove": {
+                    "particles_nb": 2
+                  }
+                }
+              },
+              "retina_detect": false
+            });
+
+
+
+
+            /* Codigo original particulas js */
+  /*           {
+            "particles": {
+              "number": {
+                "value": 149,
+                "density": {
+                  "enable": true,
+                  "value_area": 600
+                }
+              },
+              "color": {
+                "value": "#ffffff"
+              },
+              "shape": {
+                "type": "circle",
+                "stroke": {
+                  "width": 1,
+                  "color": "#3058b9"
+                },
+                "polygon": {
+                  "nb_sides": 5
+                },
+                "image": {
+                  "src": "img/github.svg",
+                  "width": 100,
+                  "height": 100
+                }
+              },
+              "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                  "enable": false,
+                  "speed": 1,
+                  "opacity_min": 0.1,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                  "enable": false,
+                  "speed": 40,
+                  "size_min": 0.1,
+                  "sync": false
+                }
+              },
+              "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+              },
+              "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": true,
+                "straight": false,
+                "out_mode": "bounce",
+                "bounce": false,
+                "attract": {
+                  "enable": true,
+                  "rotateX": 600,
+                  "rotateY": 1200
+                }
+              }
+            },
+            "interactivity": {
+              "detect_on": "window",
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "grab"
+                },
+                "onclick": {
+                  "enable": true,
+                  "mode": "push"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 400,
+                  "line_linked": {
+                    "opacity": 1
+                  }
+                },
+                "bubble": {
+                  "distance": 400,
+                  "size": 40,
+                  "duration": 2,
+                  "opacity": 8,
+                  "speed": 3
+                },
+                "repulse": {
+                  "distance": 200,
+                  "duration": 0.4
+                },
+                "push": {
+                  "particles_nb": 4
+                },
+                "remove": {
+                  "particles_nb": 2
+                }
+              }
+            },
+            "retina_detect": true
+          } */
+
+    </script>
   </body>
 </html>

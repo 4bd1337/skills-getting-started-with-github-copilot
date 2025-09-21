@@ -1,31 +1,91 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
+/* Import Orbitron font for cyberpunk style */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
+/* Cyberpunk Neon Palette & Static Grid Background */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Orbitron', Arial, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: #fff;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background: #18122B;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#particles-js{
+  position:relative;
+  top: 0px;
+  left:0px;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 50%;
+}
+
+/* Vanishing point vertical and horizontal grid (static, centered) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to right,
+      #00fff7 0px,
+      #00fff7 2px,
+      transparent 2px,
+      transparent 75px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      #ff00cc 0px,
+      #ff00cc 2px,
+      transparent 2px,
+      transparent 48px
+    );
+  opacity: 0.18;
+  transform-origin: 50vw 50vh;
+  transform: perspective(600px) rotateX(60deg) scaleY(1.2);
+  animation: grid-move 2s linear infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 48px, 32px 48px;
+  }
+}
+
+/* Remove animated horizontal lines and related elements */
+.cyberpunk-bg,
+.cyberpunk-line {
+  display: none !important;
 }
 
 header {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding: 20px 0;
-  margin-bottom: 30px;
-  background-color: #1a237e;
-  color: white;
-  border-radius: 5px;
+  margin: 5px 15px 50px 15px;
+  background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
+  color: #00fff7;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #ff00cc, 0 0 40px #00fff7 inset;
+  border: 2px solid #00fff7;
 }
 
 header h1 {
   margin-bottom: 10px;
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #ff00cc;
 }
 
 main {
@@ -42,10 +102,11 @@ main {
 }
 
 section {
-  background-color: white;
+  background: rgba(24, 18, 43, 0.95);
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 0 12px #00fff7, 0 0 24px #ff00cc inset;
+  border: 2px solid #ff00cc;
   width: 100%;
   max-width: 500px;
 }
@@ -53,25 +114,36 @@ section {
 section h3 {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  color: #1a237e;
+  border-bottom: 2px solid #00fff7;
+  color: #ff00cc;
+  font-family: 'Orbitron', Arial, sans-serif;
+  text-shadow: 0 0 6px #00fff7;
 }
 
 .activity-card {
   margin-bottom: 15px;
   padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border: 2px solid #00fff7;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #333399 0%, #18122B 100%);
+  box-shadow: 0 0 8px #ff00cc;
+  transition: box-shadow 0.2s;
+}
+
+.activity-card:hover {
+  box-shadow: 0 0 24px #00fff7, 0 0 32px #ff00cc;
 }
 
 .activity-card h4 {
   margin-bottom: 10px;
-  color: #0066cc;
+  color: #00fff7;
+  font-family: 'Orbitron', Arial, sans-serif;
+  text-shadow: 0 0 6px #ff00cc;
 }
 
 .activity-card p {
   margin-bottom: 8px;
+  color: #fff;
 }
 
 .form-group {
@@ -82,54 +154,73 @@ section h3 {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #ff00cc;
+  text-shadow: 0 0 4px #00fff7;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 2px solid #00fff7;
   border-radius: 4px;
   font-size: 16px;
+  background: #18122B;
+  color: #fff;
+  box-shadow: 0 0 8px #ff00cc inset;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ff00cc;
+  outline: none;
 }
 
 button {
-  background-color: #1a237e;
-  color: white;
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+  color: #18122B;
   border: none;
   padding: 10px 15px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  box-shadow: 0 0 8px #00fff7;
+  font-family: 'Orbitron', Arial, sans-serif;
+  transition: background 0.2s, color 0.2s;
 }
 
 button:hover {
-  background-color: #3949ab;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  color: #fff;
 }
 
 .message {
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
+  font-family: 'Orbitron', Arial, sans-serif;
 }
 
 .success {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
+  background: #00fff7;
+  color: #18122B;
+  border: 2px solid #ff00cc;
+  box-shadow: 0 0 8px #00fff7;
 }
 
 .error {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
+  background: #ff00cc;
+  color: #18122B;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 8px #ff00cc;
 }
 
 .info {
-  background-color: #d1ecf1;
-  color: #0c5460;
-  border: 1px solid #bee5eb;
+  background: #333399;
+  color: #00fff7;
+  border: 2px solid #ff00cc;
+  box-shadow: 0 0 8px #333399;
 }
 
 .hidden {
@@ -140,5 +231,245 @@ footer {
   text-align: center;
   margin-top: 30px;
   padding: 20px;
-  color: #666;
+  color: #00fff7;
+  background: transparent;
+  font-family: 'Orbitron', Arial, sans-serif;
+  text-shadow: 0 0 8px #ff00cc;
+}
+
+.participants-section {
+  margin-top: 12px;
+  padding: 10px;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  border-radius: 4px;
+  border: 2px solid #333399;
+  box-shadow: 0 0 8px #ff00cc;
+}
+
+.participants-section strong {
+  color: #18122B;
+  display: block;
+  margin-bottom: 6px;
+  font-family: 'Orbitron', Arial, sans-serif;
+}
+
+.participants-list {
+  margin-left: 18px;
+  margin-bottom: 0;
+  color: #18122B;
+  font-size: 15px;
+}
+
+.participants-none {
+  color: #333399;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Add this at the end of your CSS file */
+
+/* Cyberpunk animated horizontal lines (scrolling from top to bottom) */
+.cyberpunk-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Number of lines and spacing */
+:root {
+  --cyberpunk-lines: 6;
+  --cyberpunk-spacing: calc(100vh / (var(--cyberpunk-lines) + 1));
+}
+
+.cyberpunk-line {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 2px;
+  opacity: 0.35;
+  animation: cyberpunk-line-scroll 3s linear infinite;
+}
+
+.cyberpunk-line:nth-child(1) {
+  top: calc(var(--cyberpunk-spacing) * 1);
+  animation-delay: 0s;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+}
+.cyberpunk-line:nth-child(2) {
+  top: calc(var(--cyberpunk-spacing) * 2);
+  animation-delay: 0.5s;
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+}
+.cyberpunk-line:nth-child(3) {
+  top: calc(var(--cyberpunk-spacing) * 3);
+  animation-delay: 1s;
+  background: linear-gradient(90deg, #00fff7 0%, #333399 100%);
+}
+.cyberpunk-line:nth-child(4) {
+  top: calc(var(--cyberpunk-spacing) * 4);
+  animation-delay: 1.5s;
+  background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
+}
+.cyberpunk-line:nth-child(5) {
+  top: calc(var(--cyberpunk-spacing) * 5);
+  animation-delay: 2s;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+}
+.cyberpunk-line:nth-child(6) {
+  top: calc(var(--cyberpunk-spacing) * 6);
+  animation-delay: 2.5s;
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+}
+
+@keyframes cyberpunk-line-scroll {
+  0% { opacity: 0.35; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+.cyberpunk-line:nth-child(5) {
+  top: calc(var(--cyberpunk-spacing) * 5);
+  animation-delay: 2s;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+}
+.cyberpunk-line:nth-child(6) {
+  top: calc(var(--cyberpunk-spacing) * 6);
+  animation-delay: 2.5s;
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+}
+
+@keyframes cyberpunk-line-scroll {
+  0% { opacity: 0.35; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+form#signup-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+form#signup-form label {
+  margin-bottom: 0.3em;
+}
+
+form#signup-form input[type="email"],
+form#signup-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  font-size: 1em;
+  border-radius: 4px;
+  border: 1px solid #888;
+  background: #222;
+  color: #fff;
+}
+
+form#signup-form button[type="submit"] {
+  width: 100%;
+  padding: 0.7em;
+  font-size: 1em;
+  border-radius: 4px;
+  border: none;
+  /* Use same gradient as other buttons */
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+  color: #18122B;
+  cursor: pointer;
+  margin-top: 0.5em;
+  font-family: 'Orbitron', Arial, sans-serif;
+  box-shadow: 0 0 8px #00fff7;
+  transition: background 0.2s, color 0.2s;
+}
+
+form#signup-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  color: #fff;
+}
+
+#signup-container {
+  max-width: 500px;
+  width: 100%;
+  min-height: unset;
+  height: 100%;
+  display: inline-block;
+  flex-direction: unset;
+  justify-content: unset;
+  align-items: unset;
+  padding-bottom: 0;
+  vertical-align: top;
+  /* Remove background and box-shadow if you want it to blend in more */
+  /* background: none;
+  box-shadow: none;
+  border: none; */
+}
+
+/* Volume slider styles */
+#volume-slider {
+  appearance: none;
+  width: 75px;
+  height: 12px;
+  background: linear-gradient(180deg, #00fff7 0%, #ff00cc 100%);
+  border-radius: 8px;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #ff00cc, 0 0 8px #00fff7 inset;
+  outline: none;
+  margin-bottom: 0;
+  opacity: 1;
+  position: fixed;
+  bottom: 75px;    /* Adjust for header height */
+  left: 5px;   /* Padding from left */
+  z-index: 20;
+  transform: rotate(180deg);
+  /* Add a subtle glow for cyberpunk effect */
+  transition: box-shadow 0.2s;
+}
+
+#volume-slider:focus {
+  outline: none;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#volume-slider::-webkit-slider-thumb:hover {
+  background: #00fff7;
+  border-color: #ff00cc;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#volume-slider::-moz-range-thumb:hover {
+  background: #00fff7;
+  border-color: #ff00cc;
+  box-shadow: 0 0 18px #ff00cc, 0 0 12px #00fff7 inset;
+}
+
+#volume-slider::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff00cc;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 12px #00fff7, 0 0 8px #ff00cc inset;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
 }
